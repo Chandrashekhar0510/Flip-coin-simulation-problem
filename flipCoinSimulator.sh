@@ -9,10 +9,9 @@ first=0
 end=1
 diff=$(( end-first+1 ))
 
-while [[ $tail_count -lt 11 && $head_count -lt 11 ]]
+while [[ $tail_count -lt 21 && $head_count -lt 21 ]]
 do
         res=$(( first + $(( $RANDOM%diff )) ))
-        #echo $res
 
         if [ $res -eq 0 ]
         then
@@ -22,12 +21,15 @@ do
                 ((tail_count++))
                 echo "Tail" $tail_count
         fi
-
-        if [ $head_count == 11 ]
-        then
-                echo "Head win"
-        elif [ $tail_count == 11 ]
-        then
-                echo "Tail win"
-        fi
 done
+
+if [ $head_count == 21 ]
+then
+	count=$(( $head_count - $tail_count ))
+	echo "Head win by $count points"
+elif [ $tail_count == 21 ]
+then
+	count=$(( $tail_count - $head_count ))
+        echo "Tail win by $count points"
+fi
+
